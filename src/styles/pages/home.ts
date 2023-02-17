@@ -34,7 +34,7 @@ export const Product = styled('a', {
 
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
 
     backgroundColor: 'rgba(0,0,0, 0.6)',
 
