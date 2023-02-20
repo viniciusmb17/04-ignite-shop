@@ -1,8 +1,10 @@
 import { styled } from '../../styles'
 
-export const BagContainer = styled('div', {
+export const BagContainer = styled('button', {
   display: 'block',
   height: 52,
+  border: 0,
+  background: 'transparent',
 })
 
 export const BagMain = styled('main', {

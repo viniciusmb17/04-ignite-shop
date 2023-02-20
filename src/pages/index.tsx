@@ -18,7 +18,6 @@ interface HomeProps {
     price: string
   }[]
 }
-
 export default function Home({ products }: HomeProps) {
   const [sliderRef] = useKeenSlider({
     slides: {
@@ -49,7 +48,7 @@ export default function Home({ products }: HomeProps) {
                     <strong>{product.name}</strong>
                     <span>{product.price}</span>
                   </div>
-                  <Bag color="green" />
+                  <Bag color="green" onClick={() => alert('Clicou')} />
                 </ProductFooter>
               </Product>
             </Link>
