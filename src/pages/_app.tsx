@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Container>
       <Header>
         <Image src={logoImg} alt="" width={129.74} height={52} />
-        <Bag isFull />
+        <Bag />
       </Header>
       <Component {...pageProps} />
     </Container>

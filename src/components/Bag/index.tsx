@@ -3,10 +3,12 @@ import { Handbag } from 'phosphor-react'
 
 interface BagProps {
   color?: 'gray' | 'green'
-  isFull?: boolean
+  counter?: number
 }
 
-export function Bag({ color = 'gray', isFull = false }: BagProps) {
+export function Bag({ color = 'gray', counter = 0 }: BagProps) {
+  const isFull = counter > 0
+
   return (
     <BagContainer>
       <BagMain color={color} isFull={isFull}>
@@ -14,7 +16,7 @@ export function Bag({ color = 'gray', isFull = false }: BagProps) {
       </BagMain>
       {isFull && (
         <BagCounter>
-          <span>1</span>
+          <span>{counter}</span>
         </BagCounter>
       )}
     </BagContainer>
