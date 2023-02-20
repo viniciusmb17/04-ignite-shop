@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useKeenSlider } from 'keen-slider/react'
 import Stripe from 'stripe'
 import { stripe } from '../lib/stripe'
-import { HomeContainer, Product } from '../styles/pages/home'
+import { HomeContainer, Product, ProductFooter } from '../styles/pages/home'
 
 import 'keen-slider/keen-slider.min.css'
 
@@ -41,12 +41,15 @@ export default function Home({ products }: HomeProps) {
               prefetch={false}
             >
               <Product className="keen-slider__slide">
-                <Image src={product.imageUrl} width={520} height={480} alt="" />
+                <Image src={product.imageUrl} width={654} height={480} alt="" />
 
-                <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
-                </footer>
+                <ProductFooter>
+                  <div>
+                    <strong>{product.name}</strong>
+                    <span>{product.price}</span>
+                  </div>
+                  <i>Cart</i>
+                </ProductFooter>
               </Product>
             </Link>
           )
