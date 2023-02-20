@@ -8,6 +8,7 @@ import { stripe } from '../lib/stripe'
 import { HomeContainer, Product, ProductFooter } from '../styles/pages/home'
 
 import 'keen-slider/keen-slider.min.css'
+import { Bag } from '../components/Bag'
 
 interface HomeProps {
   products: {
@@ -48,7 +49,7 @@ export default function Home({ products }: HomeProps) {
                     <strong>{product.name}</strong>
                     <span>{product.price}</span>
                   </div>
-                  <i>Cart</i>
+                  <Bag color="green" />
                 </ProductFooter>
               </Product>
             </Link>
