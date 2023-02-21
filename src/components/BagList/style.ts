@@ -36,19 +36,16 @@ export const BagMain = styled('main', {
   display: 'flex',
   width: '100%',
   marginLeft: 'auto',
-  minHeight: 656,
 })
 
 export const BagItems = styled('section', {
   display: 'flex',
   flexDirection: 'column',
-  maxHeight: '20.625rem',
+  width: '100%',
+  minHeight: '20.625rem',
   gap: '1.5rem',
-})
-
-export const BagItemContainer = styled('div', {
-  display: 'flex',
-  flexDirection: 'row',
+  background: 'red',
+  maxHeight: 656,
 })
 
 export const CloseButton = styled(DialogClose, {
@@ -60,4 +57,63 @@ export const CloseButton = styled(DialogClose, {
   lineHeight: 0,
   cursor: 'pointer',
   color: '$gray-500',
+})
+
+export const BagFooter = styled('footer', {
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+  marginTop: '12.375rem',
+  gap: 55,
+
+  section: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 3,
+  },
+
+  button: {
+    marginTop: 'auto',
+    background: '$green500',
+    border: 0,
+    color: '$white',
+    borderRadius: 8,
+    padding: '1.25rem',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '$md',
+
+    '&:disabled': {
+      opacity: 0.6,
+      cursor: 'not-allowed',
+    },
+
+    '&:not(:disabled):hover': {
+      background: '$green300',
+    },
+  },
+})
+
+export const QuantityInfo = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+
+  span: {
+    fontSize: '$md',
+  },
+})
+
+export const TotalInfo = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  fontFamily: 'Roboto, sans-serif',
+  fontSize: '$md',
+  lineHeight: 1.6,
+
+  span: {
+    fontSize: '$lg',
+    lineHeight: 1.4,
+  },
 })

@@ -1,13 +1,16 @@
 import { DialogContent, DialogPortal } from '@radix-ui/react-dialog'
-import { X } from 'phosphor-react'
+import { BagItem } from '../BagItem'
 import {
   BagMain,
   BagListContainer,
   Header,
   BagItems,
-  BagItemContainer,
   CloseButton,
+  BagFooter,
+  QuantityInfo,
+  TotalInfo,
 } from './style'
+import { X } from 'phosphor-react'
 
 // TODO: Finalizar implementação visual e funcional de BagList utilizando RadixUi
 export function BagList() {
@@ -26,16 +29,23 @@ export function BagList() {
               <BagItem />
             </BagItems>
           </BagMain>
+          <BagFooter>
+            <section>
+              <QuantityInfo>
+                <p>Quantidade</p>
+                <span>3 itens</span>
+              </QuantityInfo>
+              <TotalInfo>
+                <strong>Valor total</strong>
+                <span>
+                  <strong>R$ 270,00</strong>
+                </span>
+              </TotalInfo>
+            </section>
+            <button>Finalizar compra</button>
+          </BagFooter>
         </BagListContainer>
       </DialogContent>
     </DialogPortal>
-  )
-}
-
-function BagItem(props) {
-  return (
-    <BagItemContainer>
-      <div>teste</div>
-    </BagItemContainer>
   )
 }

@@ -21,6 +21,10 @@ export const BagMain = styled('main', {
       green: {
         background: '$green500',
         color: '$white',
+
+        '&:hover': {
+          background: '$green300',
+        },
       },
       gray: {
         background: '$gray800',
