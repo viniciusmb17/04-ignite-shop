@@ -42,10 +42,30 @@ export const BagItems = styled('section', {
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  minHeight: '20.625rem',
+  height: 'calc(330px + 158px)',
   gap: '1.5rem',
-  background: 'red',
-  maxHeight: 656,
+  overflowY: 'auto',
+
+  // Scrollbar
+  /* width */
+  '&::-webkit-scrollbar': {
+    width: 15,
+  },
+
+  /* Track */
+  '&::-webkit-scrollbar-track': {
+    background: '#121214',
+  },
+
+  /* Handle */
+  '&::-webkit-scrollbar-thumb': {
+    background: '$green500',
+  },
+
+  /* Handle on hover */
+  '&::-webkit-scrollbar-thumb:hover': {
+    background: '$green300',
+  },
 })
 
 export const CloseButton = styled(DialogClose, {
@@ -63,7 +83,7 @@ export const BagFooter = styled('footer', {
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  marginTop: '12.375rem',
+  marginTop: '40px',
   gap: 55,
 
   section: {

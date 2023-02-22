@@ -27,6 +27,8 @@ export function BagList() {
           <BagMain>
             <BagItems>
               <BagItem />
+              <BagItem />
+              <BagItem />
             </BagItems>
           </BagMain>
           <BagFooter>
