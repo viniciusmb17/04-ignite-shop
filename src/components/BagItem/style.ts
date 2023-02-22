@@ -48,4 +48,8 @@ export const ItemDetailsAction = styled('button', {
   fontWeight: '700',
   lineHeight: 1.6,
   cursor: 'pointer',
+
+  '&:hover': {
+    color: '$green300',
+  },
 })

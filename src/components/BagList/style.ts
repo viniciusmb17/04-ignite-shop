@@ -54,7 +54,7 @@ export const BagItems = styled('section', {
 
   /* Track */
   '&::-webkit-scrollbar-track': {
-    background: '#121214',
+    background: '$gray900',
   },
 
   /* Handle */
