@@ -7,15 +7,24 @@ import { Container, Header } from '../styles/pages/app'
 import { Bag } from '../components/Bag'
 import { BagList } from '../components/BagList'
 import { Dialog as DialogRoot, DialogTrigger } from '@radix-ui/react-dialog'
+import { useRouter } from 'next/router'
 
 globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { push } = useRouter()
+
   return (
     <>
       <Container>
         <Header>
-          <Image src={logoImg} alt="" width={129.74} height={52} />
+          <Image
+            src={logoImg}
+            alt=""
+            width={129.74}
+            height={52}
+            onClick={() => push('/')}
+          />
           <DialogRoot>
             <DialogTrigger asChild>
               <Bag counter={5} />
