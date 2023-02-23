@@ -4,11 +4,13 @@ export const SuccessContainer = styled('main', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   margin: '0 auto',
+  paddingTop: '4.5rem',
   height: 656,
 
   h1: {
+    marginTop: '3rem',
     fontSize: '$2xl',
     color: '$gray100',
   },
@@ -18,13 +20,13 @@ export const SuccessContainer = styled('main', {
     color: '$gray300',
     maxWidth: 560,
     textAlign: 'center',
-    marginTop: '2rem',
+    marginTop: '1.5rem',
     lineHeight: 1.4,
   },
 
   a: {
     display: 'block',
-    marginTop: '5rem',
+    marginTop: '4rem',
     fontSize: '$lg',
     color: '$green500',
     textDecoration: 'none',
@@ -38,12 +40,11 @@ export const SuccessContainer = styled('main', {
 
 export const ImageContainer = styled('div', {
   width: '100%',
-  maxWidth: 130,
+  maxWidth: 145,
   height: 145,
   background: 'linear-gradient(180deg, #1ea483, #7465d4)',
-  borderRadius: 8,
+  borderRadius: 99,
   padding: '0.25rem',
-  marginTop: '4rem',
 
   display: 'flex',
   alignItems: 'center',

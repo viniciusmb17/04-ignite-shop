@@ -20,4 +20,12 @@ export const Header = styled('header', {
   img: {
     cursor: 'pointer',
   },
+
+  variants: {
+    isSuccessPage: {
+      true: {
+        justifyContent: 'center',
+      },
+    },
+  },
 })

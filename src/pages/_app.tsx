@@ -12,12 +12,13 @@ import { useRouter } from 'next/router'
 globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { push } = useRouter()
+  const { push, pathname } = useRouter()
+  const isSuccessPage = pathname === '/success'
 
   return (
     <>
       <Container>
-        <Header>
+        <Header isSuccessPage={isSuccessPage}>
           <Image
             src={logoImg}
             alt=""
@@ -25,12 +26,14 @@ export default function App({ Component, pageProps }: AppProps) {
             height={52}
             onClick={() => push('/')}
           />
-          <DialogRoot>
-            <DialogTrigger asChild>
-              <Bag counter={5} />
-            </DialogTrigger>
-            <BagList />
-          </DialogRoot>
+          {!isSuccessPage && (
+            <DialogRoot>
+              <DialogTrigger asChild>
+                <Bag counter={5} />
+              </DialogTrigger>
+              <BagList />
+            </DialogRoot>
+          )}
         </Header>
         <Component {...pageProps} />
       </Container>
