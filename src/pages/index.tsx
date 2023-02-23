@@ -26,6 +26,8 @@ export default function Home({ products }: HomeProps) {
     },
   })
 
+  // TODO: Implementar Cards de Loading/Skeleton
+
   return (
     <>
       <Head>

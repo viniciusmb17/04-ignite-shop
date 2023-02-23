@@ -12,7 +12,7 @@ import {
 } from './style'
 import { X } from 'phosphor-react'
 
-// TODO: Finalizar implementação visual e funcional de BagList utilizando RadixUi
+// TODO: Finalizar implementação funcional de BagList utilizando RadixUi
 export function BagList() {
   return (
     <DialogPortal>

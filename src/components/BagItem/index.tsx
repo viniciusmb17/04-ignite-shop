@@ -9,7 +9,7 @@ import {
 } from './style'
 import camiseta5 from '../../assets/camisetas/5.png'
 
-// TODO: Implement BagItem component
+// TODO: Finalizar implementação funcional de BagItem component
 
 export function BagItem(props) {
   return (
