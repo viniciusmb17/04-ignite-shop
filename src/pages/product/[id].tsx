@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import Stripe from 'stripe'
 import { stripe } from '../../lib/stripe'
 import {
@@ -11,6 +11,7 @@ import {
   ProductContainer,
   ProductDetails,
 } from '../../styles/pages/product'
+import { CardSkeleton } from '../../styles/pages/product/CardSkeleton'
 
 interface ProductProps {
   product: {
@@ -58,9 +59,11 @@ export default function Product({ product }: ProductProps) {
         <title>{product.name} | Ignite Shop</title>
       </Head>
       <ProductContainer>
-        <ImageContainer>
-          <Image src={product.imageUrl} width={520} height={480} alt="" />
-        </ImageContainer>
+        <Suspense fallback={<CardSkeleton />}>
+          <ImageContainer>
+            <Image src={product.imageUrl} width={520} height={480} alt="" />
+          </ImageContainer>
+        </Suspense>
         <ProductDetails>
           <h1>{product.name}</h1>
           <span>{product.price}</span>

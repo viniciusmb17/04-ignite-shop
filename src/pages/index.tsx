@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -9,6 +10,7 @@ import { HomeContainer, Product, ProductFooter } from '../styles/pages/home'
 
 import 'keen-slider/keen-slider.min.css'
 import { Bag } from '../components/Bag'
+import { CardSkeleton } from '../styles/pages/home/components/CardSkeleton'
 
 interface HomeProps {
   products: {
@@ -37,23 +39,35 @@ export default function Home({ products }: HomeProps) {
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map((product) => {
           return (
-            <Link
-              href={`/product/${product.id}`}
+            <Suspense
               key={product.id}
-              prefetch={false}
+              fallback={
+                <CardSkeleton key={product.id} className="keen-slider__slide" />
+              }
             >
-              <Product className="keen-slider__slide">
-                <Image src={product.imageUrl} width={654} height={480} alt="" />
+              <Link
+                href={`/product/${product.id}`}
+                key={product.id}
+                prefetch={false}
+              >
+                <Product className="keen-slider__slide">
+                  <Image
+                    src={product.imageUrl}
+                    width={654}
+                    height={480}
+                    alt=""
+                  />
 
-                <ProductFooter>
-                  <div>
-                    <strong>{product.name}</strong>
-                    <span>{product.price}</span>
-                  </div>
-                  <Bag color="green" onClick={() => alert('Clicou')} />
-                </ProductFooter>
-              </Product>
-            </Link>
+                  <ProductFooter>
+                    <div>
+                      <strong>{product.name}</strong>
+                      <span>{product.price}</span>
+                    </div>
+                    <Bag color="green" onClick={() => alert('Clicou')} />
+                  </ProductFooter>
+                </Product>
+              </Link>
+            </Suspense>
           )
         })}
       </HomeContainer>
