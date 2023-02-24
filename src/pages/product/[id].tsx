@@ -49,35 +49,34 @@ export default function Product({ product }: ProductProps) {
   }
   const { isFallback } = useRouter()
 
-  if (isFallback) {
-    return <p>Loading...</p>
-  }
-
   return (
     <>
       <Head>
         <title>{product.name} | Ignite Shop</title>
       </Head>
-      <ProductContainer>
-        <Suspense fallback={<CardSkeleton />}>
-          <ImageContainer>
-            <Image src={product.imageUrl} width={520} height={480} alt="" />
-          </ImageContainer>
-        </Suspense>
-        <ProductDetails>
-          <h1>{product.name}</h1>
-          <span>{product.price}</span>
+      {isFallback && <p>Loading...</p>}
+      {!isFallback && (
+        <ProductContainer>
+          <Suspense fallback={<CardSkeleton />}>
+            <ImageContainer>
+              <Image src={product.imageUrl} width={520} height={480} alt="" />
+            </ImageContainer>
+          </Suspense>
+          <ProductDetails>
+            <h1>{product.name}</h1>
+            <span>{product.price}</span>
 
-          <p>{product.description}</p>
+            <p>{product.description}</p>
 
-          <button
-            disabled={isCreatingCheckoutSession}
-            onClick={handleBuyProduct}
-          >
-            Colocar na sacola
-          </button>
-        </ProductDetails>
-      </ProductContainer>
+            <button
+              disabled={isCreatingCheckoutSession}
+              onClick={handleBuyProduct}
+            >
+              Colocar na sacola
+            </button>
+          </ProductDetails>
+        </ProductContainer>
+      )}
     </>
   )
 }
