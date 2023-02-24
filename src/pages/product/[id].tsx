@@ -25,6 +25,8 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const { isFallback } = useRouter()
+
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false)
 
@@ -47,13 +49,15 @@ export default function Product({ product }: ProductProps) {
       alert('Falha ao redirecionar ao checkout')
     }
   }
-  const { isFallback } = useRouter()
 
   return (
     <>
-      <Head>
-        <title>{product.name} | Ignite Shop</title>
-      </Head>
+      {product && (
+        <Head>
+          <title>{product.name} | Ignite Shop</title>
+        </Head>
+      )}
+
       {isFallback && <p>Loading...</p>}
       {!isFallback && (
         <ProductContainer>
