@@ -9,7 +9,7 @@ import { Container, Header } from '../styles/pages/app'
 import { Bag } from '../components/Bag'
 import { BagList } from '../components/BagList'
 import { Dialog as DialogRoot, DialogTrigger } from '@radix-ui/react-dialog'
-import { CartProvider, useShoppingCart } from 'use-shopping-cart'
+import { CartProvider } from 'use-shopping-cart'
 
 globalStyles()
 
