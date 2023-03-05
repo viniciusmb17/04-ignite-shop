@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { DialogContent, DialogPortal } from '@radix-ui/react-dialog'
 import { BagItem } from '../BagItem'
 import {
@@ -11,9 +12,45 @@ import {
   TotalInfo,
 } from './style'
 import { X } from 'phosphor-react'
+import { useState } from 'react'
+import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 
-// TODO: Finalizar implementação funcional de BagList utilizando RadixUi
 export function BagList() {
+  const { removeItem, cartDetails, cartCount, totalPrice } = useShoppingCart()
+  const formattedTotalPrice = formatCurrencyString({
+    value: totalPrice,
+    currency: 'BRL',
+    language: 'pt-BR',
+  })
+
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+    useState(false)
+
+  const cartEntries = Object.values(cartDetails ?? {}).map((item) => (
+    <BagItem key={item.id} item={item} removeItem={removeItem} />
+  ))
+
+  // TODO: Refazer/ajustar função para criar sessão de checkout
+  async function handleCreateCheckoutSession() {
+    try {
+      setIsCreatingCheckoutSession(true)
+
+      const response = await axios.post('/api/checkout', {
+        priceId: product.defaultPriceId,
+      })
+
+      const { checkoutUrl } = response.data
+
+      window.location.href = checkoutUrl
+    } catch (err) {
+      // Conectar com uma ferramenta de observabilidade (Datadog / Sentry)
+
+      setIsCreatingCheckoutSession(false)
+
+      alert('Falha ao redirecionar ao checkout')
+    }
+  }
+
   return (
     <DialogPortal>
       <DialogContent asChild>
@@ -26,24 +63,23 @@ export function BagList() {
           </Header>
           <BagMain>
             <BagItems>
-              <BagItem />
-              <BagItem />
-              <BagItem />
-              <BagItem />
-              <BagItem />
-              <BagItem />
+              {cartEntries.length === 0 ? <p>O carrinho está vazio.</p> : null}
+              {cartEntries.length > 0 && cartEntries}
             </BagItems>
           </BagMain>
           <BagFooter>
             <section>
               <QuantityInfo>
                 <p>Quantidade</p>
-                <span>3 itens</span>
+                <span>
+                  {cartCount}
+                  {cartCount === 1 ? ' item' : ' itens'}
+                </span>
               </QuantityInfo>
               <TotalInfo>
                 <strong>Valor total</strong>
                 <span>
-                  <strong>R$ 270,00</strong>
+                  <strong>{formattedTotalPrice}</strong>
                 </span>
               </TotalInfo>
             </section>

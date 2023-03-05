@@ -21,6 +21,9 @@ interface HomeProps {
     price: string
   }[]
 }
+
+// TODO: Create a useCustomHook for slider arrows functionality
+
 export default function Home({ products }: HomeProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loadedSlider, setLoadedSlider] = useState(false)

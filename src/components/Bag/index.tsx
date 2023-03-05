@@ -1,14 +1,16 @@
 import { BagContainer, BagMain, BagCounter } from './style'
 import { Handbag } from 'phosphor-react'
+import { useShoppingCart } from 'use-shopping-cart'
 
 interface BagProps {
   color?: 'gray' | 'green'
-  counter?: number
   onClick?: () => void
 }
 
-export function Bag({ color = 'gray', counter = 0, onClick }: BagProps) {
-  const isFull = counter > 0
+export function Bag({ color = 'gray', onClick }: BagProps) {
+  const { cartCount } = useShoppingCart()
+  console.log(cartCount)
+  const isFull = cartCount > 0
 
   return (
     <BagContainer onClick={onClick}>
@@ -17,7 +19,7 @@ export function Bag({ color = 'gray', counter = 0, onClick }: BagProps) {
       </BagMain>
       {isFull && (
         <BagCounter>
-          <span>{counter}</span>
+          <span>{cartCount}</span>
         </BagCounter>
       )}
     </BagContainer>
