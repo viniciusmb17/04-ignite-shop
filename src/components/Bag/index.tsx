@@ -5,19 +5,19 @@ import { useShoppingCart } from 'use-shopping-cart'
 interface BagProps {
   color?: 'gray' | 'green'
   onClick?: () => void
+  hasCounter?: boolean
 }
 
-export function Bag({ color = 'gray', onClick }: BagProps) {
+export function Bag({ color = 'gray', onClick, hasCounter = false }: BagProps) {
   const { cartCount } = useShoppingCart()
-  console.log(cartCount)
-  const isFull = cartCount > 0
+  const isNotEmpty = cartCount > 0
 
   return (
     <BagContainer onClick={onClick}>
-      <BagMain color={color} isFull={isFull}>
+      <BagMain color={color} isNotEmpty={isNotEmpty}>
         <Handbag size={'1.5rem'} weight="bold" />
       </BagMain>
-      {isFull && (
+      {isNotEmpty && hasCounter && (
         <BagCounter>
           <span>{cartCount}</span>
         </BagCounter>

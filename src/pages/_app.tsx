@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
             {!isSuccessPage && (
               <DialogRoot>
                 <DialogTrigger asChild>
-                  <Bag />
+                  <Bag hasCounter />
                 </DialogTrigger>
                 <BagList />
               </DialogRoot>

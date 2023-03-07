@@ -16,7 +16,15 @@ import { useState } from 'react'
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 
 export function BagList() {
-  const { removeItem, cartDetails, cartCount, totalPrice } = useShoppingCart()
+  const {
+    removeItem,
+    cartDetails,
+    cartCount,
+    totalPrice,
+    incrementItem,
+    decrementItem,
+    setItemQuantity,
+  } = useShoppingCart()
   const formattedTotalPrice = formatCurrencyString({
     value: totalPrice,
     currency: 'BRL',
@@ -27,7 +35,15 @@ export function BagList() {
     useState(false)
 
   const cartEntries = Object.values(cartDetails ?? {}).map((item) => (
-    <BagItem key={item.id} item={item} removeItem={removeItem} />
+    <BagItem
+      key={item.id}
+      item={item}
+      quantity={item.quantity}
+      removeItem={removeItem}
+      incrementItem={incrementItem}
+      decrementItem={decrementItem}
+      setItemQuantity={setItemQuantity}
+    />
   ))
 
   // TODO: Refazer/ajustar função para criar sessão de checkout

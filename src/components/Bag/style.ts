@@ -31,7 +31,7 @@ export const BagMain = styled('main', {
         color: '$gray500',
       },
     },
-    isFull: {
+    isNotEmpty: {
       true: {
         color: '$gray300',
       },
