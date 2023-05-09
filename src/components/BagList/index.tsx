@@ -37,6 +37,7 @@ export function BagList() {
 
   const cartEntries = Object.values(cartDetails ?? {}).map((item) => {
     console.log(item)
+
     return (
       <BagItem
         key={item.id}
@@ -59,6 +60,10 @@ export function BagList() {
           cartDetails,
         })
 
+        if (response?.error) {
+          console.log(response?.error)
+        }
+
         const { data } = response
 
         if (data?.sessionId) {
@@ -75,10 +80,6 @@ export function BagList() {
     } else {
       alert('O carrinho está vazio')
     }
-  }
-
-  if (isCreatingCheckoutSession) {
-    return <div>Loading...</div>
   }
 
   return (
@@ -113,7 +114,10 @@ export function BagList() {
                 </span>
               </TotalInfo>
             </section>
-            <button onClick={handleCreateCheckoutSession}>
+            <button
+              onClick={handleCreateCheckoutSession}
+              disabled={isCreatingCheckoutSession}
+            >
               Finalizar compra
             </button>
           </BagFooter>

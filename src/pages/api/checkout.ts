@@ -16,7 +16,7 @@ export default async function handler(
   }
 
   const lineItems = cartDetailsArray.map((cartItem) => {
-    if (!cartItem.defaultPriceId) {
+    if (!cartItem?.defaultPriceId) {
       res.status(400).json({ error: 'Price not found.' })
       return {}
     }
