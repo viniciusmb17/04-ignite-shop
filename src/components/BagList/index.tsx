@@ -35,17 +35,20 @@ export function BagList() {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false)
 
-  const cartEntries = Object.values(cartDetails ?? {}).map((item) => (
-    <BagItem
-      key={item.id}
-      item={item}
-      quantity={item.quantity}
-      removeItem={removeItem}
-      incrementItem={incrementItem}
-      decrementItem={decrementItem}
-      setItemQuantity={setItemQuantity}
-    />
-  ))
+  const cartEntries = Object.values(cartDetails ?? {}).map((item) => {
+    console.log(item)
+    return (
+      <BagItem
+        key={item.id}
+        item={item}
+        quantity={item.quantity}
+        removeItem={removeItem}
+        incrementItem={incrementItem}
+        decrementItem={decrementItem}
+        setItemQuantity={setItemQuantity}
+      />
+    )
+  })
 
   // TODO: Refazer/ajustar função para criar sessão de checkout
   async function handleCreateCheckoutSession() {

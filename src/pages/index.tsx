@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { MouseEvent, Suspense, useState } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
@@ -76,7 +77,7 @@ export default function Home({ products }: HomeProps) {
                   <ProductFooter>
                     <div>
                       <strong>{product.name}</strong>
-                      <span>{product.price}</span>
+                      <span>{product.formattedPrice}</span>
                     </div>
                     <Bag
                       color="green"
@@ -100,13 +101,13 @@ export default function Home({ products }: HomeProps) {
             )}
             {currentSlide !==
               instanceRef.current.track.details.slides.length -
-                perViewSlider && (
-              <Arrow
-                onClick={(e: any) =>
-                  e.stopPropagation() || instanceRef.current?.next()
-                }
-              />
-            )}
+              perViewSlider && (
+                <Arrow
+                  onClick={(e: any) =>
+                    e.stopPropagation() || instanceRef.current?.next()
+                  }
+                />
+              )}
           </>
         )}
       </HomeContainer>
@@ -126,10 +127,11 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
+      formattedPrice: new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
       }).format(price.unit_amount / 100),
+      price: price.unit_amount,
     }
   })
 
