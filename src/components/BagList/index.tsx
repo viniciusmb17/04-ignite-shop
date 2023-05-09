@@ -36,8 +36,6 @@ export function BagList() {
     useState(false)
 
   const cartEntries = Object.values(cartDetails ?? {}).map((item) => {
-    console.log(item)
-
     return (
       <BagItem
         key={item.id}
@@ -60,18 +58,20 @@ export function BagList() {
           cartDetails,
         })
 
-        if (response?.error) {
-          console.log(response?.error)
-        }
-
         const { data } = response
 
         if (data?.sessionId) {
           redirectToCheckout(data.sessionId)
         }
-      } catch (err) {
+      } catch (error) {
         // Conectar com uma ferramenta de observabilidade (Datadog / Sentry)
-        console.error(err)
+        if (axios.isAxiosError(error)) {
+          console.log(error.status)
+          console.error(error.response)
+          // Do something with this error...
+        } else {
+          console.error(error)
+        }
 
         alert('Falha ao redirecionar para o checkout')
       } finally {
