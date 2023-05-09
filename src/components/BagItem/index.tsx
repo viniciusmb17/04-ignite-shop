@@ -14,7 +14,6 @@ import {
   ItemDetailsName,
   ItemDetailsPrice,
 } from './style'
-import camiseta5 from '../../assets/camisetas/5.png'
 import { Minus, Plus } from 'phosphor-react'
 import { ChangeEvent } from 'react'
 
@@ -58,7 +57,7 @@ export function BagItem({
   return (
     <BagItemContainer>
       <ImageContainer>
-        <Image src={camiseta5} alt="image" width={101.94} height={93} />
+        <Image src={item.imageUrl} alt="image" width={101.94} height={93} />
       </ImageContainer>
       <ItemDetails>
         <ItemDetailsName>{item.name}</ItemDetailsName>
