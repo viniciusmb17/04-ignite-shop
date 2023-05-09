@@ -24,6 +24,7 @@ export function BagList() {
     incrementItem,
     decrementItem,
     setItemQuantity,
+    redirectToCheckout,
   } = useShoppingCart()
   const formattedTotalPrice = formatCurrencyString({
     value: totalPrice,
@@ -48,23 +49,33 @@ export function BagList() {
 
   // TODO: Refazer/ajustar função para criar sessão de checkout
   async function handleCreateCheckoutSession() {
-    try {
+    if (cartCount > 0) {
       setIsCreatingCheckoutSession(true)
+      try {
+        const response = await axios.post('/api/checkout', {
+          cartDetails,
+        })
 
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
-      })
+        const { data } = response
 
-      const { checkoutUrl } = response.data
+        if (data?.sessionId) {
+          redirectToCheckout(data.sessionId)
+        }
+      } catch (err) {
+        // Conectar com uma ferramenta de observabilidade (Datadog / Sentry)
+        console.error(err)
 
-      window.location.href = checkoutUrl
-    } catch (err) {
-      // Conectar com uma ferramenta de observabilidade (Datadog / Sentry)
-
-      setIsCreatingCheckoutSession(false)
-
-      alert('Falha ao redirecionar ao checkout')
+        alert('Falha ao redirecionar para o checkout')
+      } finally {
+        setIsCreatingCheckoutSession(false)
+      }
+    } else {
+      alert('O carrinho está vazio')
     }
+  }
+
+  if (isCreatingCheckoutSession) {
+    return <div>Loading...</div>
   }
 
   return (
@@ -79,7 +90,7 @@ export function BagList() {
           </Header>
           <BagMain>
             <BagItems>
-              {cartEntries.length === 0 ? <p>O carrinho está vazio.</p> : null}
+              {cartEntries.length === 0 && <p>O carrinho está vazio.</p>}
               {cartEntries.length > 0 && cartEntries}
             </BagItems>
           </BagMain>
@@ -99,7 +110,9 @@ export function BagList() {
                 </span>
               </TotalInfo>
             </section>
-            <button>Finalizar compra</button>
+            <button onClick={handleCreateCheckoutSession}>
+              Finalizar compra
+            </button>
           </BagFooter>
         </BagListContainer>
       </DialogContent>

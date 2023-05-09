@@ -1,10 +1,11 @@
 import { BagContainer, BagMain, BagCounter } from './style'
 import { Handbag } from 'phosphor-react'
+import { MouseEvent } from 'react'
 import { useShoppingCart } from 'use-shopping-cart'
 
 interface BagProps {
   color?: 'gray' | 'green'
-  onClick?: () => void
+  onClick?: (event: MouseEvent<HTMLElement>) => void
   hasCounter?: boolean
 }
 

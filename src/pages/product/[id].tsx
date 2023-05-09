@@ -89,6 +89,9 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
         name: product.name,
         imageUrl: product.images[0],
         price: price.unit_amount,
+        price_data: {
+          price_id: price.id,
+        },
         description: product.description,
         defaultPriceId: price.id,
       },

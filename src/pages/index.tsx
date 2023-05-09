@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'
+import { MouseEvent, Suspense, useState } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -7,24 +7,22 @@ import { useKeenSlider } from 'keen-slider/react'
 import Stripe from 'stripe'
 import { stripe } from '../lib/stripe'
 import { HomeContainer, Product, ProductFooter } from '../styles/pages/home'
+import { Product as IProduct } from 'use-shopping-cart/core'
 
 import 'keen-slider/keen-slider.min.css'
 import { Bag } from '../components/Bag'
 import { CardSkeleton } from '../styles/pages/home/components/CardSkeleton'
 import { Arrow } from '../styles/pages/home/components/Arrow'
+import { useShoppingCart } from 'use-shopping-cart'
 
 interface HomeProps {
-  products: {
-    id: string
-    name: string
-    imageUrl: string
-    price: string
-  }[]
+  products: IProduct[]
 }
 
 // TODO: Create a useCustomHook for slider arrows functionality
 
 export default function Home({ products }: HomeProps) {
+  const { addItem } = useShoppingCart()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loadedSlider, setLoadedSlider] = useState(false)
   const perViewSlider = 3
@@ -41,6 +39,11 @@ export default function Home({ products }: HomeProps) {
       setLoadedSlider(true)
     },
   })
+
+  function handleAddToCart(event: MouseEvent<HTMLElement>, product: IProduct) {
+    event.preventDefault()
+    addItem(product)
+  }
 
   return (
     <>
@@ -75,7 +78,10 @@ export default function Home({ products }: HomeProps) {
                       <strong>{product.name}</strong>
                       <span>{product.price}</span>
                     </div>
-                    <Bag color="green" onClick={() => alert('Clicou')} />
+                    <Bag
+                      color="green"
+                      onClick={(event) => handleAddToCart(event, product)}
+                    />
                   </ProductFooter>
                 </Product>
               </Link>

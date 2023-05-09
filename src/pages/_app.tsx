@@ -16,7 +16,7 @@ globalStyles()
 export default function App({ Component, pageProps }: AppProps) {
   const { push, pathname } = useRouter()
   const isSuccessPage = pathname === '/success'
-  const stripeKey = process.env.STRIPE_PUBLIC_KEY
+  const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 
   return (
     <>
